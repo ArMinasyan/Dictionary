@@ -1,0 +1,24 @@
+{
+  "name": "dictionary",
+  "version": "1.0.0",
+  "description": "Diploma work, theme 'Online Dictionary'",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arsen Aleksanyan",
+  "license": "ISC",
+  "dependencies": {
+    "connect": "^3.6.6",
+    "crypto": "^1.0.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "hbs": "^4.0.4",
+    "mongoose": "^5.5.1",
+    "nodemon": "^1.18.11",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "uid": "0.0.2",
+    "vhost": "^3.0.2"
+  }
+}
