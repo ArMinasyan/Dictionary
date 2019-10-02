@@ -1,0 +1,93 @@
+body{
+    background: url('../images/00585a3568a0a7d.jpg');
+  /* background: red;*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#len{
+    width: 12%;
+    float: left;
+    border-style: solid;
+    border-color: black;
+    border-width: 1%;
+}
+
+
+#main{
+    width: 99%;
+    height: 5%;
+    margin-top: 10%;
+    padding-left: 8%;
+}
+
+#srch{
+    background-color:border-color;
+    margin-left: 14%;
+    padding-left: 3%;
+    padding-right: 6%;
+    text-align: justify;
+    width: 71.5%;
+    height: 65%;
+    border-width:1%;
+    border-color:black;
+    border-style: dashed;
+    overflow-y: auto;
+}
+
+
+#arm,#rus,#eng{
+    font-size: 14pt;
+    color: black;
+    font-weight: 900;
+    font-weight: bold;
+}
+
+#arm:hover, #rus:hover,#eng:hover{
+    color:red;
+    cursor: hand;
+}
+
+
+#exp{
+    font-size: 12pt;
+    color: black;
+    width: 20%;
+}
+
+.main1{
+    width: 22%;
+    float: left;
+    margin-left: 1%;
+    border-style: solid;
+    border-color: black;
+    border-width: 1%;
+}
+
+#main .main2{
+    width: 10%;
+    margin-left: 1%;
+    float: left;
+}
+
+/*Login Form*/
+
+fieldset{
+    margin-left: 35%;
+    margin-top: 10%;
+    width: 25%;
+    display: none;
+}
+
+fieldset div{
+    margin-left: 12%;
+    width: 80%;
+    height: 7%;
+}
+
+fieldset button{
+    width: 70%;
+    margin-left:15%;
+}

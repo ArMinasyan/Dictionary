@@ -1,0 +1,43 @@
+.glyphicon:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.input{
+    width:100%;
+}
+
+.input1{
+    width: 30%;
+}
+.input2{
+    resize: none;
+    width: 30%;
+    height: 20%;
+}
+
+#save{
+    background-color:blue;
+    width: 10%;
+}
+
+#insert div{
+    height: 5%;
+}
+
+#control {
+    margin-left: 78%;
+}
+
+#control button{
+    width: 45%;
+}
+
+#control div{
+    
+}
+td:hover{
+   border-color: red;
+   border-style: dotted;
+   border-width: 0.2%;
+}
