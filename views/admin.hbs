@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>{{code}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../public/javascripts/admin.js"></script>
+    <link rel="stylesheet" href="../public/stylesheets/admin.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+
+<body>
+    <div id='control'>
+        <span>{{firstname}} {{lastname}}</span>
+        
+        <input type="submit" id='logout' class="btn btn-primary" value="Դուրս գալ">
+        <input type="submit" id='save_send' class="btn btn-primary" value="Հաստատել">
+        <form method="POST" action="/logout"></form>
+    </div>
+
+    <fieldset id='insert'>
+        <div><input type="text" class='input1' id='uname' placeholder="Մուտքանուն">
+        <input type="text" class='input1' id='pass' placeholder="Գաղտնաբառ"></div>
+        <div><input type="text" class='input1' id='name' placeholder="Առարկա">
+        <input type="text" class='input1' id='sector' placeholder="Բաժին"></div>
+        <input type="submit" id='save' value="Պահպանել">
+    </fieldset>
+
+    <div id='tbl'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Մուտքանուն</th>
+                    <th>Գաղտնաբառ</th>
+                    <th>Առարկա</th>
+                    <th>Բաժին</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>{{code}}</title>
+    <link rel="stylesheet" href="../public/stylesheets/Lecturer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../public/javascripts/login.js"></script>
+    <link rel="stylesheet" href="../public/stylesheets/admin.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+
+<body>
+    <div id='control'>
+        <span>{{firstname}} {{lastname}}</span>
+        <button type="submit" id='save_send' class="btn btn-primary">Հաստատել</button>
+        <button type="submit" id='logout' class="btn btn-primary">Դուրս գալ</button>
+
+        <form method="POST" action="/logout"></form>
+    </div>
+
+    <fieldset id='insert' style="position:inherit;">
+        <input type="text" class='input1' id='armenian' placeholder="Հայերեն">
+        <input type="text" class='input1' id='russian' placeholder="Ռուսերեն">
+        <input type="text" class='input1' id='english' placeholder="Անգլերեն">
+        <!---->
+        <button type="submit" class="btn btn-primary" id='savequestion'>Պահպանել</button><br>
+        <!---->
+        <textarea class='input2' id='explanation_arm' placeholder="Բացատրությունը հայերեն"></textarea>
+        <textarea class='input2' id='explanation_rus' placeholder="Բացատրությունը ռուսերեն"></textarea>
+        <textarea class='input2' id='explanation_eng' placeholder="Բացատրությունը անգլերեն"></textarea>
+    </fieldset>
+
+    <div id='tbl' style="height: 63%;overflow-y: scroll;">
+        <table style="width: 99%;">
+
+        </table>
+    </div>
+
+
+</body>
+
+</html>

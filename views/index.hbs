@@ -1,0 +1,149 @@
+﻿<html>
+
+<head>
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../public/stylesheets/index.css">
+    <script>
+        $(document).on('keyup', '#name', function () {
+            if ($('#name').val() === '') style('name', 'red');
+            if ($('#len').val() == 'arm') {
+                var arm = new RegExp(/[^\u0531-\u0556\u0561-\u0587\u0020]/);
+                if (arm.test($('#name').val())) style('name', 'red'); else style('name', 'white');
+            } else if ($('#len').val() == 'rus') {
+                var rus = new RegExp(/[^\u0410-\u042F\u0430-\u044F\u0020]/);
+                if (rus.test($('#name').val())) style('name', 'red'); else style('name', 'white');
+            } else if ($('#len').val() == 'eng') {
+                var eng = new RegExp(/[^\u0041-\u005A\u0061-\u007A\u0020]/);
+                if (eng.test($('#name').val())) style('name', 'red'); else style('name', 'white');
+            }
+        });
+
+        function style(id, color) {
+            $("#" + id).css({
+                'border-style': 'solid',
+                'border-width': '2pt',
+                'border-color': color
+            });
+        };
+
+        $(document).ready(function () {
+            $('#log').click(function () {
+                $('#main').css('margin-top', '1%');
+                $('#login').css('display', 'block');
+                $('#srch').css('display', 'none');
+            });
+        });
+
+
+        $(document).on('change keyup','#name, #sector',function () {
+
+            $('#srch').html('');
+            $('#login').css('display', 'none');
+            $('#srch').css('display', 'block');
+            $.ajax({
+                url: 'http://localhost:3000/search',
+                method: 'post',
+                type: 'json',
+                data: {
+                    type: $('#len').val(),
+                    name: $('#name').val(),
+                    sector: $('#sector').val(),
+                },
+                success: function (data) {
+                    if (data.data.length == 1) {
+                        $('#srch').append("<div><span id='arm'" + data.data[0].id + ">" + data.data[0].armenian + "</span>-" +
+                            "<span id='rus'" + data.data[0].id + ">" + data.data[0].russian + "</span>-" +
+                            "<span id='eng'" + data.data[0].id + ">" + data.data[0].english + "</span>" +
+                            "<div><span class='exp' id='exp'" + data.data[0].id + "></span></div>");
+                        if ($('#len').val() == 'arm') $('.exp').html(data.data[0].explanation_am);
+                        if ($('#len').val() == 'rus') $('.exp').html(data.data[0].explanation_ru);
+                        if ($('#len').val() == 'eng') $('.exp').html(data.data[0].explanation_en);
+                        $('#arm').hover(function () { $('#exp' + $('#arm').attr('id').substr(3)).html(data.data[0].explanation_am) });
+                        $('#rus').hover(function () { $('#exp' + $('#rus').attr('id').substr(3)).html(data.data[0].explanation_ru) });
+                        $('#eng').hover(function () { $('#exp' + $('#eng').attr('id').substr(3)).html(data.data[0].explanation_en) });
+                    }
+                    else {
+                        $('#srch').html('');
+                        for (var i = 0; i < data.data.length; i++) {
+                            $('#srch').append("<div><span class='word' id='arm'" + data.data[i].id + ">" + data.data[i].armenian + "</span>-" +
+                                "<span class='word' id='rus'" + data.data[i].id + ">" + data.data[i].russian + "</span>-" +
+                                "<span class='word' id='eng'" + data.data[i].id + ">" + data.data[i].english + "</span>" +
+                                "<div><span class='exp' id='exp'" + data.data[0].id + "></span></div>");
+                            $('.word').click(function (e) {
+                                $.ajax
+                                    ({
+                                        url: 'http://localhost:3000/search2',
+                                        method: 'post',
+                                        type: 'json',
+                                        data:
+                                        {
+                                            type: e.target.id.substr(0, 3),
+                                            name: e.target.innerHTML,
+                                        },
+                                        success: function (data) {
+                                            if (data) {
+                                                $('#srch').html('');
+                                                $('#srch').append("<div><span id='arm'" + data.data[0].id + ">" + data.data[0].armenian + "</span>-" +
+                                                    "<span id='rus'" + data.data[0].id + ">" + data.data[0].russian + "</span>-" +
+                                                    "<span id='eng'" + data.data[0].id + ">" + data.data[0].english + "</span>" +
+                                                    "<div><span class='exp' id='exp'" + data.data[0].id + "></span></div>");
+                                                if ($('#len').val() == 'arm') $('.exp').html(data.data[0].explanation_am);
+                                                if ($('#len').val() == 'rus') $('.exp').html(data.data[0].explanation_ru);
+                                                if ($('#len').val() == 'eng') $('.exp').html(data.data[0].explanation_en);
+                                                $('#arm').hover(function () { $('#exp' + $('#arm').attr('id').substr(3)).html(data.data[0].explanation_am) });
+                                                $('#rus').hover(function () { $('#exp' + $('#rus').attr('id').substr(3)).html(data.data[0].explanation_ru) });
+                                                $('#eng').hover(function () { $('#exp' + $('#eng').attr('id').substr(3)).html(data.data[0].explanation_en) });
+                                            }
+                                        },
+                                    });
+                            });
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id='main'>
+        <div>
+            <select class="form-control" id="len">
+                <option value="arm">Հայերեն</option>
+                <option value="rus">Русский</option>
+                <option value="eng">English</option>
+            </select>
+        </div>
+        <div>
+            <select class="form-control main1" id="sector" style="width:28%;" onchange="srch()">
+                <option value="">Ընտրեք բաժինը</option>
+                <option value="Տեղեկատվական Անվտանգություն">Տեղեկատվական Անվտանգություն</option>
+            </select>
+        </div>
+        <div><input style="width:40%;" type="text" id='name' class="form-control main1"
+                placeholder="Մուտքագրեք փնտրվող բառը"></div>
+        <div>
+            <div><button id='log' class="btn btn-primary main2">Մուտք</button></div>
+        </div>
+    </div><br>
+    <div id="srch">
+
+    </div>
+
+
+
+    <fieldset id='login'>
+        <form method="POST" action="/login">
+            <div><input type="text" id='username' class="form-control" name='username' placeholder="Մուտքանուն"></div>
+            <div><input type="password" id='password' class="form-control" name='password' placeholder="Գաղտնաբառ">
+            </div>
+            <div><button type="submit" id='log1' class="btn btn-primary main2">Մուտք</button></div>
+        </form>
+    </fieldset>
+</body>
+
+</html>
