@@ -54,6 +54,9 @@ var admin = mongoose.model('admin', {
     sector: String
 }, 'user');
 
+mongoose.connect('mongodb://localhost:27017/user2', {
+        useNewUrlParser: true
+    });
 app.post('/login', passport.authenticate('login', { failureRedirect: '/' }), function (req, res) {
 
     if (req.isAuthenticated() && req.user.name != 'admin') {
@@ -109,9 +112,6 @@ app.post('/get_question', function (req, res) {
 });
 
 app.post('/admin_data', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user2', {
-        useNewUrlParser: true
-    });
     admin.find(function (err, result) {
         res.json({ result: result });
     })
@@ -157,9 +157,6 @@ app.post('/example', function (req, res) {
 });
 //////////////////////////////
 app.post('/add_user', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user2', {
-        useNewUrlParser: true
-    });
     var data = req.body.d1;
 
     for (var index = 0; index < req.body.len; index++) {
@@ -191,10 +188,6 @@ app.post('/add_user', function (req, res) {
 });
 /////////////////////
 app.post('/search', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user2', {
-        useNewUrlParser: true
-    });
-
     if (!req.body.sector) {
         if (req.body.type == 'arm' && req.body.name != '') dictionary.find({ armenian: new RegExp('^' + req.body.name) }, function (err, result) { res.json({ data: result }) });
         if (req.body.type == 'rus' && req.body.name != '') dictionary.find({ russian: new RegExp('^' + req.body.name) }, function (err, result) { res.json({ data: result }) });
@@ -203,10 +196,6 @@ app.post('/search', function (req, res) {
         dictionary.find({ sector: req.body.sector }, function (err, result) { res.json({ data: result }) });
     }
 }).post('/search2', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user2', {
-        useNewUrlParser: true
-    });
-
     if (!req.body.sector) {
         if (req.body.type == 'arm' && req.body.name != '') dictionary.find({ armenian: req.body.name }, function (err, result) { res.json({ data: result }) });
         if (req.body.type == 'rus' && req.body.name != '') dictionary.find({ russian: req.body.name }, function (err, result) { res.json({ data: result }) });
